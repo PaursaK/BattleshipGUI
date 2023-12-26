@@ -1,19 +1,28 @@
-class Ship:
+from Ocean import Ocean
 
-    #instance variables
+class Ship:
+    '''generic ship object that is the backbone for the ships used in the battlship game'''
+
+    #INSTANCE VARIABLES
+
+    #coordinates for the ship bow
     bowRow = 0
     bowColumn = 0
 
+    #length of ship
     length = 0
 
+    #boolean for whether the ship is horiztonal
     horizontal = False
 
+    #the position available to hit for the ship(boolean array)
     hitArray =[]
 
-    shipType = "Base"
+    #ship type
+    shipType = "Generic"
 
     def __init__(self, length):
-        '''Constructor that establishes the length of the shit and the boolean hit array to keep track of whether
+        '''Constructor that establishes the length of the ship and the boolean hit array to keep track of whether
         shots hit the ship'''
         self.length = length
         self.hitArray = [False for i in range(length)]
@@ -21,34 +30,109 @@ class Ship:
 
     #getters and setters
     def getBowRow(self):
+        '''returns the bowRow instance variable integer'''
         return self.bowRow
 
     def getBowColumn(self):
+        '''returns the bowColumn instance variable integer'''
         return self.bowColumn
 
     def setBowRow(self, row):
+        '''param: integer row
+        sets the bowRow to the integer passed'''
         self.bowRow = row
 
     def setBowColumn(self, column):
+        '''param: integer column
+        sets the bowColumn to the integer passed'''
         self.bowColumn = column
 
     def isHorizontal(self):
+        '''returns the Horizontal instance variable (true or false)'''
         return self.horizontal
 
     def setHorizontal(self, horizontal):
+        '''param: horizontal boolean (true/false)
+        sets the horizontal variable to the boolean passed'''
         self.horizontal = horizontal
 
     def getLength(self):
+        '''returns the length of the ship'''
         return self.length
 
     def getHitArray(self):
+        '''returns the hit array/list'''
         return self.hitArray
 
     def getShipType(self):
+        '''returns a string with the ship type'''
         return self.shipType
 
+    def isSunk(self):
+        '''returns true or false indicating whether the ship is sunk or not.
+        true if there is no False spot found in the hit array
+        False if there is a False found in the hit array'''
+
+        #check if the False is still in the hit array and return false
+        #indicating the ship is not sunk
+        if (False in self.hitArray):
+            return False
+        else:
+            #if true occupies the entire array return true
+            return True
+
+    def okToPlaceShipAt(self, row, column, horizontal, oceanObject):
+        pass
+
+    def placeShipAt(self, row, column, horizontal, oceanObject):
+        pass
+
+    def shootAt(self, row, column):
+
+        #check whether the ship being shot at is sunk already
+        if(self.isSunk() == False):
+
+            #check whether the ship is vertical
+            if(self.isHorizontal() == False):
+
+                #check if the bowColumn is equal to the column passed
+                if(self.getBowColumn() == column):
+
+                    # check if row passed is within the bowRow and bowRow  minus the ship length
+                    if (self.getBowRow() >= row and row >= (self.getBowRow() - self.getLength())):
+
+                        #update hit array to reflect the hit and return true
+                        self.getHitArray()[self.getBowRow() - row] = True
+                        return True
+
+            #This is when the ship is horizontal
+            else:
+
+                # check if the bowColumn is equal to the column passed
+                if (self.getBowRow() == row):
+
+                # check if column passed is within the bowColumn and bowColumn minus the ship length
+                    if (self.getBowColumn() >= column and column >= (self.getBowColumn() - self.getLength())):
+
+                        #update hit array to reflect the hit and return true
+                        self.getHitArray()[self.getBowColumn() - column] = True
+                        return True
+
+        #if a hit does not land, return false
+        return False
+
+
+
+
+
+
     def __str__(self):
-        return f'{self.shipType}'
+        '''returns a single character String representing the object
+        return: "s" if sunk and "x" if not sunk (but hit)'''
+        if(self.isSunk()):
+            return "s"
+
+        return "x"
 
 
 
