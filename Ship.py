@@ -85,15 +85,19 @@ class Ship:
         pass
 
     def placeShipAt(self, row, column, horizontal, oceanObject):
-        pass
+
 
     def shootAt(self, row, column):
+        '''If a part of the ship occupies the given row and column, and the ship hasn't been sunk,
+	    mark that part of the ship as "hit" and return true; otherwise return false
+	    :param: int row coordinates, int column coordinates
+	    :return: true or false depending on if the ship has been successfully "hit"'''
 
         #check whether the ship being shot at is sunk already
-        if(self.isSunk() == False):
+        if(self.isSunk() is False):
 
             #check whether the ship is vertical
-            if(self.isHorizontal() == False):
+            if(self.isHorizontal() is False):
 
                 #check if the bowColumn is equal to the column passed
                 if(self.getBowColumn() == column):
@@ -129,9 +133,12 @@ class Ship:
     def __str__(self):
         '''returns a single character String representing the object
         return: "s" if sunk and "x" if not sunk (but hit)'''
+
+        #if ships is sunk, return "s" character
         if(self.isSunk()):
             return "s"
 
+        #return "x" for hit but not sunk
         return "x"
 
 

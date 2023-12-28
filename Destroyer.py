@@ -1,6 +1,7 @@
 from Ship import Ship
 class Destroyer(Ship):
 
+    # INSTANCE VARIABLES
     length = 2
 
     shipType = "destroyer"
