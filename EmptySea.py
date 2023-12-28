@@ -1,6 +1,7 @@
 from Ship import Ship
 class EmptySea(Ship):
 
+    # INSTANCE VARIABLES
     length = 1
 
     shipType = "empty"
