@@ -1,4 +1,4 @@
-from Ocean import Ocean
+#from Ocean import Ocean
 
 class Ship:
     '''generic ship object that is the backbone for the ships used in the battlship game'''
@@ -85,7 +85,37 @@ class Ship:
         pass
 
     def placeShipAt(self, row, column, horizontal, oceanObject):
-        pass
+        '''Puts the ship in the Ocean. This involves giving values to bowRow, bowColumn, and horizontal
+	       instance variables in the ship, and it also involves putting a reference to the ship in
+	       each of 1 or more locations (up to 4) in the ships array in the Ocean object.
+	      :param: int row, int column, boolean horizontal, Ocean instance'''
+
+        #grab ship array from the ocean instance
+        oceanBoard = oceanObject.getShipArray()
+
+        #set bowRow, bowColumn, and horizontal boolean
+        self.setBowRow(row)
+        self.setBowColumn(column)
+        self.setHorizontal(horizontal)
+
+        #check if boolean is true (horizontal)
+        if(self.isHorizontal()):
+
+            #iterate over length of the ship
+            for i in range(self.getLength()):
+                #place ship horizontally along the same row, bow starts east and moves west
+                #and place the same ship in the ships array
+                oceanBoard[self.bowRow][self.bowColumn -i] = self
+
+        #in case the ship is vertical
+        else:
+            #iterate over the length of the ship
+            for i in range(self.getLength()):
+                # place ship vertically along the same column, bow starts south and moves north
+                # and place the same ship in the ships array
+                oceanBoard[self.bowRow-i][self.bowColumn] = self
+
+
 
 
     def shootAt(self, row, column):

@@ -157,6 +157,55 @@ class Ocean:
         #return false if EmptySea object was there (no hit registered)
         return False
 
+    def gamePrint(self):
+        '''Prints the Ocean Top left corner square is indexed at 0,0 Numbers should be 0 -> 9
+	       "x" - indicates a location that has been fired upon and hit a real ship
+	       "-" - indicates a location that has been fired upon and found nothing.
+  	       "s" - indicates a location containing a sunken ship.
+           "." - indicates a location that has never been fired upon'''
+
+        #grab ship array
+        shipArr = self.getShipArray()
+
+        #print the labels for the column coordinates
+        print(" ", end = " ")
+        for i in range(len(shipArr)):
+            print(i, end = " ")
+
+        #print the labels for the row coordinates
+        for i in range(len(shipArr)):
+            print()
+            print(i, end = " ")
+
+            #now iterate over columns
+            for j in range(len(shipArr)):
+
+                #check if ship at each location is sunk
+                if(shipArr[i][j].isSunk()):
+                    print(shipArr[i][j], end =  " ")
+
+                #for vertical ships
+                #get hit array, if index of hit array is true and the column matches iterated column
+                elif(shipArr[i][j].getHitArray()[shipArr[i][j].getBowRow()-i] and shipArr[i][j].getBowColumn() == j):
+                    #print the type of hit either 'x' for ship or '-' for empty sea object
+                    print(shipArr[i][j], end = " ")
+
+                # for horizontal ships
+                # get hit array, if index of hit array is true and the row matches iterated row
+                elif(shipArr[i][j].getHitArray()[shipArr[i][j].getBowColumn()-j] and shipArr[i][j].getBowRow() == i):
+                    # print the type of hit either 'x' for ship or '-' for empty sea object
+                    print(shipArr[i][j], end = " ")
+
+                else:
+                    #print for a spot that has not been fired upon
+                    print(".", end = " ")
+
+
+
+
+
+
+
 
 
 

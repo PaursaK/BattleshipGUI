@@ -13,5 +13,6 @@ Destroyer_instance = Destroyer()
 Submarine_instance = Submarine()
 
 
+ocean_instance = Ocean()
 
-
+ocean_instance.gamePrint()
