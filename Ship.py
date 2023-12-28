@@ -85,6 +85,7 @@ class Ship:
         pass
 
     def placeShipAt(self, row, column, horizontal, oceanObject):
+        pass
 
 
     def shootAt(self, row, column):
