@@ -105,21 +105,21 @@ class Ship:
             #use try and except block to see if potential placement is out of bounds
             try:
                 for i in range(shipLength):
-                    newColumn = column -i
-
+                    newColumn = column - i
                     if(oceanObject.isOccupied(row,newColumn)):
                         return False
-            except:
+
+            except IndexError as e:
                 return False
 
             #then check if ship can be legally placed (no diagnol or horizontal adjacent)
-            for i in range(row - 1, row+1):
+            for i in range(row - 1, row+2):
 
-                for j in range(column-shipLength, column+1):
+                for j in range(column-shipLength, column+2):
                     try:
                         if(oceanObject.isOccupied(i, j)):
                             return False
-                    except:
+                    except IndexError as e:
                         continue
 
         #VERTICAL CHECK
@@ -134,17 +134,17 @@ class Ship:
 
                     if (oceanObject.isOccupied(newRow, column)):
                         return False
-            except:
+            except IndexError as e:
                 return False
 
             # then check if ship can be legally placed (no diagnol or horizontal adjacent)
-            for i in range(row - shipLength, row + 1):
+            for i in range(row - shipLength, row + 2):
 
-                for j in range(column - 1, column + 1):
+                for j in range(column - 1, column + 2):
                     try:
                         if (oceanObject.isOccupied(i, j)):
                             return False
-                    except:
+                    except IndexError as e:
                         continue
 
         #check pass without returning False, its okay to place ship

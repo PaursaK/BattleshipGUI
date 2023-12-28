@@ -15,18 +15,16 @@ Submarine_instance = Submarine()
 
 ocean_instance = Ocean()
 
-ocean_instance.gamePrint()
+#ocean_instance.gamePrint()
 print()
 print()
 
 ocean_instance.placeAllShipsRandomly()
 
 
-while(True):
 
-    user_input = input("coordinate row: ")
-    user_input2 = input("coordinate column: ")
-
-    ocean_instance.printWithShips()
-    ocean_instance.shootAt(int(user_input), int(user_input2))
-    ocean_instance.gamePrint()
+ocean_instance.printWithShips()
+ocean_instance.shootAt(0, 0)
+print()
+print()
+ocean_instance.gamePrint()
