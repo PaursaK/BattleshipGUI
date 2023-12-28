@@ -180,25 +180,56 @@ class Ocean:
             #now iterate over columns
             for j in range(len(shipArr)):
 
+
                 #check if ship at each location is sunk
                 if(shipArr[i][j].isSunk()):
                     print(shipArr[i][j], end =  " ")
 
                 #for vertical ships
                 #get hit array, if index of hit array is true and the column matches iterated column
-                elif(shipArr[i][j].getHitArray()[shipArr[i][j].getBowRow()-i] and shipArr[i][j].getBowColumn() == j):
+                elif(shipArr[i][j].isHorizontal() == False and shipArr[i][j].getHitArray()[shipArr[i][j].getBowRow()-i] and shipArr[i][j].getBowColumn() == j):
                     #print the type of hit either 'x' for ship or '-' for empty sea object
                     print(shipArr[i][j], end = " ")
 
                 # for horizontal ships
                 # get hit array, if index of hit array is true and the row matches iterated row
-                elif(shipArr[i][j].getHitArray()[shipArr[i][j].getBowColumn()-j] and shipArr[i][j].getBowRow() == i):
+                elif(shipArr[i][j].isHorizontal() == True and shipArr[i][j].getHitArray()[shipArr[i][j].getBowColumn()-j] and shipArr[i][j].getBowRow() == i):
                     # print the type of hit either 'x' for ship or '-' for empty sea object
                     print(shipArr[i][j], end = " ")
 
                 else:
                     #print for a spot that has not been fired upon
                     print(".", end = " ")
+
+
+    def printWithShips(self):
+
+        # grab ship array
+        shipArr = self.getShipArray()
+
+        # print the labels for the column coordinates
+        print(" ", end=" ")
+        for i in range(len(shipArr)):
+            print(i, end=" ")
+
+        # print the labels for the row coordinates
+        for i in range(len(shipArr)):
+            print()
+            print(i, end=" ")
+
+            # now iterate over columns
+            for j in range(len(shipArr)):
+
+                if(shipArr[i][j].getShipType() == "battleship"):
+                    print("b", end = " ")
+                elif(shipArr[i][j].getShipType() == "cruiser"):
+                    print("c", end=" ")
+                elif(shipArr[i][j].getShipType() == "destroyer"):
+                    print("d", end=" ")
+                elif(shipArr[i][j].getShipType() == "submarine"):
+                    print("s", end=" ")
+                else:
+                    print("-", end = " ")
 
 
 

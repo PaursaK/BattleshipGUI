@@ -71,7 +71,8 @@ class Ship:
     def isSunk(self):
         '''returns true or false indicating whether the ship is sunk or not.
         true if there is no False spot found in the hit array
-        False if there is a False found in the hit array'''
+        False if there is a False found in the hit array
+        :return: True/False'''
 
         #check if the False is still in the hit array and return false
         #indicating the ship is not sunk
@@ -82,7 +83,72 @@ class Ship:
             return True
 
     def okToPlaceShipAt(self, row, column, horizontal, oceanObject):
-        pass
+        '''Based on given row, column, and orientation, returns true if it is okay to
+	    put a ship of this length with its bow in this location; false otherwise. The
+	    ship must not overlap another ship, or touch another ship (vertically,
+	    horizontally, diagonally), and it must not "stick out" beyond the array. Does
+	    not actually change either the ship or the Ocean. It just says if it is legal
+	    to do so.
+	    For placement consistency, let’s agree that horizontal ships face East (bow at right end) and
+	    vertical ships face South (bow at bottom end).
+	    :param: int row, int column, boolean horizontal, Ocean instance
+	    :return: true/false'''
+
+        shipLength = self.getLength()
+
+        #HORIZONTAL CHECK
+
+        #check placement compatibility for horizontal ships
+        if(horizontal):
+
+            #first try and check if ship can be placed at all
+            #use try and except block to see if potential placement is out of bounds
+            try:
+                for i in range(shipLength):
+                    newColumn = column -i
+
+                    if(oceanObject.isOccupied(row,newColumn)):
+                        return False
+            except:
+                return False
+
+            #then check if ship can be legally placed (no diagnol or horizontal adjacent)
+            for i in range(row - 1, row+1):
+
+                for j in range(column-shipLength, column+1):
+                    try:
+                        if(oceanObject.isOccupied(i, j)):
+                            return False
+                    except:
+                        continue
+
+        #VERTICAL CHECK
+        # check placement compatibility for vertical ships
+        if (horizontal is False):
+
+            # first try and check if ship can be placed at all
+            # use try and except block to see if potential placement is out of bounds
+            try:
+                for i in range(shipLength):
+                    newRow = row - i
+
+                    if (oceanObject.isOccupied(newRow, column)):
+                        return False
+            except:
+                return False
+
+            # then check if ship can be legally placed (no diagnol or horizontal adjacent)
+            for i in range(row - shipLength, row + 1):
+
+                for j in range(column - 1, column + 1):
+                    try:
+                        if (oceanObject.isOccupied(i, j)):
+                            return False
+                    except:
+                        continue
+
+        #check pass without returning False, its okay to place ship
+        return True
 
     def placeShipAt(self, row, column, horizontal, oceanObject):
         '''Puts the ship in the Ocean. This involves giving values to bowRow, bowColumn, and horizontal
