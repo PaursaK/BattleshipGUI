@@ -203,7 +203,7 @@ class Ocean:
 
 
     def printWithShips(self):
-
+        '''for testing purposes'''
         # grab ship array
         shipArr = self.getShipArray()
 

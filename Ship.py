@@ -97,7 +97,6 @@ class Ship:
         shipLength = self.getLength()
 
         #HORIZONTAL CHECK
-
         #check placement compatibility for horizontal ships
         if(horizontal):
 
@@ -106,7 +105,7 @@ class Ship:
             try:
                 for i in range(shipLength):
                     newColumn = column - i
-                    if(oceanObject.isOccupied(row,newColumn)):
+                    if(oceanObject.isOccupied(row,newColumn) or newColumn < 0):
                         return False
 
             except IndexError as e:
@@ -132,7 +131,7 @@ class Ship:
                 for i in range(shipLength):
                     newRow = row - i
 
-                    if (oceanObject.isOccupied(newRow, column)):
+                    if (oceanObject.isOccupied(newRow, column) or newRow < 0):
                         return False
             except IndexError as e:
                 return False
