@@ -82,7 +82,7 @@ def main_GUI_play():
     #create a button for each empty ship in the array
     for row in range(10):
         for column in range(10):
-            ocean_copy[row][column] = Button(frame, text = '', font=('consolas', 10), width = 2, height = 2,
+            ocean_copy[row][column] = Button(frame, text = '', font=('consolas', 20), width = 2, height = 2,
                                                         command = lambda row = row, column = column: next_turn(label_shots, label_sunkShips, ocean_copy, ocean_original, row, column))
 
             ocean_copy[row][column].grid(row = row, column = column)
