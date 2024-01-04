@@ -98,15 +98,12 @@ def next_turn(label_shots, label_sunkShips, ocean_copy, ocean_original, row, col
 
     if(ocean_copy[row][column]['text'] == '' and ocean_original.isGameOver() is False):
 
-        if(ocean_original.shootAt(row, column)):
-            ocean_copy[row][column]['text'] = ocean_original.getShipArray()[row][column]
+        ocean_original.shootAt(row, column)
+        ocean_copy[row][column]['text'] = ocean_original.getShipArray()[row][column]
 
-            label_shots.config(text = "Shots Fired: " + str(ocean_original.getShotsFired()))
-            label_sunkShips.config(text="Ships Sunk: " + str(ocean_original.getShipsSunk()))
+        label_shots.config(text = "Shots Fired: " + str(ocean_original.getShotsFired()))
+        label_sunkShips.config(text="Ships Sunk: " + str(ocean_original.getShipsSunk()))
 
-        else:
-            ocean_copy[row][column]['text'] = ocean_original.getShipArray()[row][column]
-            label_shots.config(text="Shots Fired: " + str(ocean_original.getShotsFired()))
 
 
 
