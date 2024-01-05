@@ -92,21 +92,33 @@ def main_GUI_play():
 
 
 def new_game():
-    pass
+    main_GUI_play()
+
+
+
 
 def next_turn(label_shots, label_sunkShips, ocean_copy, ocean_original, row, column):
 
-    if(ocean_copy[row][column]['text'] == '' and ocean_original.isGameOver() is False):
+    #while game is not over allow click to occur
+    if(ocean_original.isGameOver() is False):
 
-        ocean_original.shootAt(row, column)
+        #take use the click coordinates to fire a shot at the ships
+        ocean_original.shootAt(row,column)
+        #set the text of the button on the ocean copy array to the ship __str__ return value
         ocean_copy[row][column]['text'] = ocean_original.getShipArray()[row][column]
 
+        #update the labels for shots and sunk Ships
         label_shots.config(text = "Shots Fired: " + str(ocean_original.getShotsFired()))
         label_sunkShips.config(text="Ships Sunk: " + str(ocean_original.getShipsSunk()))
 
-
-
-
+    #iterate over the rows of the ocean array
+    for i in range(len(ocean_original.getShipArray())):
+        # iterate over the columns of the ocean array
+        for j in range(len(ocean_original.getShipArray()[i])):
+            #if a ship is sunk, then update all the buttons that share that ship object
+            #with the updated __str__ signature ('s')
+            if ocean_original.getShipArray()[i][j].isSunk():
+                ocean_copy[i][j].config(text = ocean_original.getShipArray()[i][j])
 
 
 if __name__ == '__main__':
