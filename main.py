@@ -92,7 +92,7 @@ def main_GUI_play():
 
 
 def new_game():
-    main_GUI_play()
+    pass
 
 
 
