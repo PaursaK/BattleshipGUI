@@ -142,21 +142,22 @@ def next_turn(row, column):
                 if ocean_original.getShipArray()[i][j].isSunk():
                     ocean_copy[i][j].config(text = ocean_original.getShipArray()[i][j])
 
-    #when the game is over
-    else:
-        #create game over after player wins
-        game_over = "GAME OVER!"
+        #after each click check if game has ended
+        if(ocean_original.isGameOver()):
 
-        # iterate over the rows of the ocean array
-        for i in range(len(ocean_original.getShipArray())):
-            # iterate over the columns of the ocean array
-            for j in range(len(ocean_original.getShipArray()[i])):
+            #create game over Banner after player wins
+            game_over = "GAME OVER!"
 
-                #if the row is equal to 4, start printing the GAME OVER on the buttons
-                if i == 4:
-                    ocean_copy[i][j].config(text=game_over[j], font = ('consolas', 40))
-                else:
-                    ocean_copy[i][j].config(text="")
+            # iterate over the rows of the ocean array
+            for i in range(len(ocean_original.getShipArray())):
+                # iterate over the columns of the ocean array
+                for j in range(len(ocean_original.getShipArray()[i])):
+
+                    #if the row is equal to 4, start printing the GAME OVER on the buttons
+                    if i == 4:
+                        ocean_copy[i][j].config(text=game_over[j], font = ('consolas', 30))
+                    else:
+                        ocean_copy[i][j].config(text="")
 
 
 
