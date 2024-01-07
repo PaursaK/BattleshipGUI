@@ -137,7 +137,61 @@ class OceanTest(unittest.TestCase):
         self.assertEqual("battleship", self.ocean.getShipArray()[9][6].getShipType())
 
     def testShootAt(self):
-        pass
+
+        #SCENARIO 1 - EMPTY SEA OBJECT FIRED UPON
+        #no ship is placed here, so function should return false
+        self.assertFalse(self.ocean.shootAt(0,0))
+        self.assertFalse(self.ocean.shootAt(9, 9))
+
+        #SCENARIO 2 - REAL SHIPS BEING FIRED UPON
+        destroyer = Destroyer()
+        row = 1
+        column = 5
+        horizontal = False
+        destroyer.placeShipAt(row, column, horizontal, self.ocean)
+
+        #test each fire is registered and the status of the ship (sunk or not)
+        self.assertTrue(self.ocean.shootAt(1, 5))
+        self.assertFalse(destroyer.isSunk())
+        self.assertTrue(self.ocean.shootAt(0, 5))
+        self.assertTrue(destroyer.isSunk())
+        self.assertEqual(self.ocean.getShipsSunk(), 1)
+
+        #SCENARIO 3 - TEST AGAINST SHIPS THAT HAVE ALREADY BEEN HIT (BOTH SUNK AND NOT SUNK)
+        sub1 = Submarine()
+        row = 0
+        column = 0
+        horizontal = False
+        sub1.placeShipAt(row, column, horizontal, self.ocean)
+
+        sub2 = Submarine()
+        row = 9
+        column = 9
+        horizontal = False
+        sub2.placeShipAt(row, column, horizontal, self.ocean)
+
+        #check that submarines were successfully fired upon
+        self.assertTrue(self.ocean.shootAt(0,0))
+        self.assertTrue(self.ocean.shootAt(9, 9))
+        #check that they are successfully registered a sunk
+        self.assertTrue(sub1.isSunk())
+        self.assertTrue(sub2.isSunk())
+        #check that hits do not register anymore after a ship has been sunk
+        self.assertFalse(self.ocean.shootAt(0, 0))
+        self.assertFalse(self.ocean.shootAt(9, 9))
+
+        destroyer2 = Destroyer()
+        row = 5
+        column = 5
+        horizontal = False
+        destroyer2.placeShipAt(row, column, horizontal, self.ocean)
+
+        #check that hitting a destroyer ship (length 2) in the same spot is registered as long as the ship is
+        #not considered sunk
+        self.assertTrue(self.ocean.shootAt(5, 5))
+        self.assertFalse(destroyer2.isSunk())
+        self.assertTrue(self.ocean.shootAt(5, 5))
+        self.assertFalse(destroyer2.isSunk())
 
     def testGetShotsFired(self):
         pass
@@ -150,28 +204,6 @@ class OceanTest(unittest.TestCase):
 
     def testGetShipArray(self):
         pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
