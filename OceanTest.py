@@ -136,6 +136,21 @@ class OceanTest(unittest.TestCase):
         self.assertEqual("battleship", self.ocean.getShipArray()[9][9].getShipType())
         self.assertEqual("battleship", self.ocean.getShipArray()[9][6].getShipType())
 
+    def testShootAt(self):
+        pass
+
+    def testGetShotsFired(self):
+        pass
+
+    def testGetHitCount(self):
+        pass
+
+    def testGetShipsSunk(self):
+        pass
+
+    def testGetShipArray(self):
+        pass
+
 
 
 
