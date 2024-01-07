@@ -25,6 +25,7 @@ def main_terminal_play():
 
     turnCount = 1
 
+
     #setup up game loop
     while(True):
 
