@@ -19,17 +19,19 @@ The **Battleship GUI Game** is a Python-based recreation of the classic game Bat
 Here’s a screenshot of the game in action:
 
 ![Gameplay Screenshot](./assets/GUI.png)
-![Gameplay Screenshot](./assets/Active_Gameplay.png)
-![Gameplay Screenshot](./assets/Game_Win.png)
+![Gameplay Screenshot](./assets/Active%20Gameplay.png)
+![Gameplay Screenshot](./assets/Game%20Win.png)
 
 ## Installation
-
+```
 git clone https://github.com/PaursaK/BattleshipGUI.git
 cd BattleshipGUI
+```
 
 ## How to Play
 
-A Graphical User Inteferace window will pop up the game will commence. Users can select different coordinates to strike in an attempt to sink 10 ships that hidden in the 10x10 ocean array.
+A Graphical User Inteferace window will pop up and the game will commence. Users can select different coordinates to strike in an attempt to sink 10 ships that hidden in the 10x10 ocean array.
+
 The game record the number of shots fired, hit count and overall ships sunk. A user wins by sinking all 10 ships.
 
 ## Technologies Used
@@ -37,6 +39,7 @@ The game record the number of shots fired, hit count and overall ships sunk. A u
 Python, Tkinter, Random, Copy
 
 ## File Structure
+```
 BattleshipGUI/
 │
 ├── .idea
@@ -57,6 +60,7 @@ BattleshipGUI/
 │   ├── Ship.py             # Parent/Super Class dedicated to defining the Ship object
 │   └── ShipTest.py         # Unit Test file for testing different features of the Ship Class 
 └── README.md               # This file
+```
 
 ## Future Improvements
 - **Two-Way Mode**: Add an option for a user to play against a computer player locally.
